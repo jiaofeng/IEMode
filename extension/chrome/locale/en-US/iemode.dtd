@@ -1,0 +1,41 @@
+<!ENTITY iemode.urlbar.menuswitch.title.IE "Enable IE Mode">
+<!ENTITY iemode.urlbar.notify.title "IE Mode">
+<!ENTITY iemode.urlbar.notify.text "Switch to IE Mode">
+<!ENTITY iemode.urlbar.notify.FF "Switch to Firefox">
+
+<!ENTITY iemode.urlbar.switch.tooltip1 "Switch rendering engine">
+<!ENTITY iemode.urlbar.switch.tooltip3 "Right-Click: Show IE Mode Options.">
+
+<!ENTITY iemode.settings.title "IE Mode Options">
+<!ENTITY iemode.settings.filter.label "Custom Filter">
+<!ENTITY iemode.settings.filter.enabled "Enable Sites Filter">
+<!ENTITY iemode.settings.filter.column.rule "Rule">
+<!ENTITY iemode.settings.filter.column.enabled "Enabled">
+<!ENTITY iemode.settings.filter.url.label "URL:">
+<!ENTITY iemode.settings.filter.button.add "Add">
+<!ENTITY iemode.settings.filter.button.delete "Delete">
+<!ENTITY iemode.settings.filter.button.default "Use Default Rule">
+
+<!ENTITY iemode.settings.filter.official.label "Official Filter">
+<!ENTITY iemode.settings.filter.official.enabled "Enable Sites Filter">
+<!ENTITY iemode.settings.filter.official.updateFilter "Auto Update">
+<!ENTITY iemode.settings.filter.official.column.rule "Rule">
+<!ENTITY iemode.settings.filter.official.column.enabled "Enabled">
+
+<!ENTITY iemode.settings.general.label "General Settings">
+<!ENTITY iemode.settings.switch.caption "When switch rendering engine:">
+<!ENTITY iemode.settings.switch.handleurl "Always use current engine to open a new URL">
+<!ENTITY iemode.settings.processmode.caption "Process Mode:">
+<!ENTITY iemode.settings.processmode.runinprocess "Run the plugin in the firefox.exe process (requires Firefox to restart)">
+
+<!ENTITY iemode.settings.iecompat.label "IE Compatibility Mode">
+<!ENTITY iemode.settings.iecompat.ie7 "IE7 Standards Mode">
+<!ENTITY iemode.settings.iecompat.ie8 "IE8 Standards Mode">
+<!ENTITY iemode.settings.iecompat.ie9 "IE9 Standards Mode">
+<!ENTITY iemode.settings.iecompat.desc "* This feature only works if you have IE8+ installed (requires Firefox to restart)">
+
+<!ENTITY iemode.settings.apply "Apply">
+<!ENTITY iemode.settings.manager "Settings Manager">
+<!ENTITY iemode.settings.default "Restore Default">
+<!ENTITY iemode.settings.import "Import Settings">
+<!ENTITY iemode.settings.export "Export Settings">

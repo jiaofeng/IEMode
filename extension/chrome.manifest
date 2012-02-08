@@ -1,0 +1,13 @@
+content	iemode chrome/content/
+skin	iemode classic/1.0 chrome/skin/
+
+overlay	chrome://browser/content/browser.xul chrome://iemode/content/iemodeOverlay.xul
+style	chrome://global/content/customizeToolbar.xul chrome://iemode/skin/iemode.css
+
+component {4A5F2348-6943-4d85-A652-A7F32B68259B} components/nsIEModeWatchFactory.js
+contract @mozilla.com.cn/iemodewatch;1 {4A5F2348-6943-4d85-A652-A7F32B68259B}
+category content-policy IEModeWatchFactoryClass @mozilla.com.cn/iemodewatch;1
+category profile-after-change nsIEModeWatchFactory @mozilla.com.cn/iemodewatch;1
+
+locale	iemode	en-US	chrome/locale/en-US/
+locale	iemode	zh-CN	chrome/locale/zh-CN/

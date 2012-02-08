@@ -1,0 +1,41 @@
+<!ENTITY iemode.urlbar.menuswitch.title.IE "使用IE模式浏览本页">
+<!ENTITY iemode.urlbar.notify.title "网银支付助手">
+<!ENTITY iemode.urlbar.notify.text "该页面已切换至IE模式">
+<!ENTITY iemode.urlbar.notify.FF "使用Firefox浏览">
+
+<!ENTITY iemode.urlbar.switch.tooltip1 "切换浏览模式">
+<!ENTITY iemode.urlbar.switch.tooltip3 "右键点击设置 网银支付助手 选项">
+
+<!ENTITY iemode.settings.title "网银支付助手 选项">
+<!ENTITY iemode.settings.filter.label "自定义">
+<!ENTITY iemode.settings.filter.enabled "使用 网银支付助手 浏览以下网址">
+<!ENTITY iemode.settings.filter.column.rule "规则">
+<!ENTITY iemode.settings.filter.column.enabled "激活">
+<!ENTITY iemode.settings.filter.url.label "加入网址:">
+<!ENTITY iemode.settings.filter.button.add "添加">
+<!ENTITY iemode.settings.filter.button.delete "删除">
+<!ENTITY iemode.settings.filter.button.default "恢复默认规则">
+
+<!ENTITY iemode.settings.filter.official.label "订阅">
+<!ENTITY iemode.settings.filter.official.enabled "使用 网银支付助手 浏览以下网址">
+<!ENTITY iemode.settings.filter.official.updateFilter "自动更新订阅列表">
+<!ENTITY iemode.settings.filter.official.column.rule "规则">
+<!ENTITY iemode.settings.filter.official.column.enabled "激活">
+
+<!ENTITY iemode.settings.general.label "功能设置">
+<!ENTITY iemode.settings.switch.caption "浏览引擎切换时:">
+<!ENTITY iemode.settings.switch.handleurl "总是以当前浏览引擎打开地址栏的新网址">
+<!ENTITY iemode.settings.processmode.caption "进程模式">
+<!ENTITY iemode.settings.processmode.runinprocess "在firefox.exe进程中运行插件(重启火狐生效)">
+
+<!ENTITY iemode.settings.iecompat.label "IE兼容模式">
+<!ENTITY iemode.settings.iecompat.ie7 "IE7标准模式">
+<!ENTITY iemode.settings.iecompat.ie8 "IE8标准模式">
+<!ENTITY iemode.settings.iecompat.ie9 "IE9标准模式">
+<!ENTITY iemode.settings.iecompat.desc "* 启用这个特性需要安装IE8或更高版本(重启火狐生效)">
+
+<!ENTITY iemode.settings.apply "应用">
+<!ENTITY iemode.settings.manager "设置管理">
+<!ENTITY iemode.settings.default "还原默认值">
+<!ENTITY iemode.settings.import "导入设置">
+<!ENTITY iemode.settings.export "导出设置">

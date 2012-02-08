@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<?xml-stylesheet href="chrome://iemode/skin/iemode.css" type="text/css" ?>
+<!DOCTYPE window [ 
+  <!ENTITY % iemodeDTD SYSTEM "chrome://iemode/locale/iemode.dtd">
+%iemodeDTD; ]>
+<overlay id="iemodeOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/x-javascript" src="chrome://iemode/content/iemodeCommon.js" />
+  <script type="application/x-javascript" src="chrome://iemode/content/iemodeOverlay.js" />
+  <window id="main-window">
+  </window>
+  <popupset>
+    <tooltip id="iemode-switch-tooltip" noautohide="true" orient="vertical"
+             position="before_start" style="padding:2px;">
+      <vbox>
+        <label value="&iemode.urlbar.switch.tooltip1;" style="margin:2px;" />
+        <label function="iemode-switch-tooltip" style="margin:2px;" />
+        <label value="&iemode.urlbar.switch.tooltip3;" style="margin:2px;" />
+      </vbox>
+    </tooltip>
+    <panel id="iemode-identity-popup" type="arrow" hidden1="true" noautofocus="true" onpopupshown="document.getElementById('iemode-identity-popup-more-info-button').focus();" level="top">
+      <hbox id="iemode-identity-popup-container" align="top">
+        <image id="iemode-identity-popup-icon"/>
+        <vbox id="iemode-identity-popup-content-box">
+          <label class="identity-popup-label" value="&iemode.urlbar.notify.title;"/>
+          <label class="identity-popup-label" value=""/>
+          <label class="identity-popup-label" value="&iemode.urlbar.notify.text;"/>
+          <label class="identity-popup-label" value=""/>
+          <hbox id="iemode-identity-popup-button-container" pack="end">
+            <button id="iemode-identity-popup-more-info-button" label="&iemode.urlbar.notify.FF;" oncommand="if(IEMode.isIEEngine()){IEMode.switchEngine();IEMode.hideNotify()}"/>
+          </hbox>
+        </vbox>
+      </hbox>
+    </panel>    
+
+  </popupset>
+  <!-- tab context menu -->
+  <menupopup id="tabContextMenu">
+    <menuseparator insertbefore="tabContextMenu" />
+    <menuitem function="switchIEMode" insertbefore="tabContextMenu" type="checkbox"
+              checked="false" label="&iemode.urlbar.menuswitch.title.IE;" oncommand="IEMode.switchEngine();" />
+  </menupopup>
+  <!-- popup menus -->
+  <popupset>
+    <!-- urlbar switch button context menu -->
+    <menupopup id="iemode-urlbar-switch-context-menu">
+      <menuitem function="switchIEMode" type="checkbox" checked="false" label="&iemode.urlbar.menuswitch.title.IE;"
+                oncommand="IEMode.switchEngine();" />
+      <menuseparator/>
+      <menuitem label="&iemode.settings.title;" oncommand="IEMode.openPrefDialog()"
+                class="menuitem-iconic iemode-icon-toolsmenu" />
+    </menupopup>
+  </popupset>
+</overlay>
