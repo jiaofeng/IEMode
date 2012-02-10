@@ -107,34 +107,21 @@ function httpGet (url, onreadystatechange) {
 		onreadystatechange(xmlHttpRequest);
 	};
 };
+   
+var updateFilter =  function(timer) {
+  	var updateUrl = getStrPref("extensions.iemode.official.updateurl", null);
+  	if(!updateUrl)
+  	  return;
+  	httpGet(updateUrl, function(response) {
+  		if (response.readyState == 4 && 200 == response.status) {
+  			var filter = response.responseText;
+  			if (filter) {
+          setStrPref("extensions.iemode.official.filterlist", filter);
+  			}
+  		}
+  	});  
+  };
 
-function updateFilter(){
-	var allwaysUpdate = getBoolPref("extensions.iemode.official.allwaysupdate", true);
-	var last_update = getIntPref("extensions.iemode.official.lastupdatetime", 0);
-  var oneDay = 24*60*60;  //24 Hours
-  var now = Date.now()/1000;
-	if (!allwaysUpdate && (now - last_update) < oneDay) {//24 Hours
-		return; 
-	}
-	var updateUrl = getStrPref("extensions.iemode.official.updateurl", null);
-	if(!updateUrl)
-	  return;
-	httpGet(updateUrl, function(response) {
-		if (response.readyState == 4 && 200 == response.status) {
-			var filter = response.responseText;
-      LOG("update filter : OK");
-			if (filter) {
-        setStrPref("extensions.iemode.official.filterlist", filter);
-				setIntPref("extensions.iemode.official.lastupdatetime", now);
-			}
-		}
-	});  
-	var hwindow = Cc["@mozilla.org/appshell/appShellService;1"]
-  			   .getService(Ci.nsIAppShellService)
-  			   .hiddenDOMWindow;
-	hwindow.setTimeout(updateFilter, oneDay*1000);
- 
-}
 
 var IEModeWatcher = {
    isIEModeURL: function(url) {
@@ -289,19 +276,8 @@ IEModeWatchFactoryClass.prototype = {
   observe: function (aSubject, aTopic, aData) {
     switch (aTopic) {
     case "profile-after-change":
-    	var _interval = 1000 * 5;
-			var hwindow = Cc["@mozilla.org/appshell/appShellService;1"]
-						   .getService(Ci.nsIAppShellService)
-						   .hiddenDOMWindow;
-
-    	hwindow.setTimeout(updateFilter, _interval);
-/*///os       getRule();
-      AddonManager.getAddonByID("iemode@mozilla.com.cn", function(addon) {
-        var uri = addon.getResourceURI();
-        var file = getFileFromURLSpec(uri.spec);
-        Services.prefs.setComplexValue("extensions.iemode.xpiDir", Ci.nsILocalFile,file);
-      });
-      */
+      LOG("profile-after-change");
+      updateFilter();
       break;
     };
   },
