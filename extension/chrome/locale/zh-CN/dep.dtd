@@ -1,8 +1,0 @@
-<!ENTITY depwarning.title "当前页面在IE 引擎下不稳定">
-<!ENTITY depwarning.intro1 "当前页面即将用IE引擎打开，但是该页面在 IE 引擎下可能不稳定。">
-<!ENTITY depwarning.intro2 "您必须更改plugin-container.exe的DEP属性，以避免访问该页面时 IE 引擎的崩溃。">
-<!ENTITY depwarning.whatShouldIDo1.content "如果你不希望更改plugin-container.exe的DEP属性，请切换回 &brandShortName; 引擎。">
-<!ENTITY depwarning.whatShouldIDo1.do "立刻离开">
-<!ENTITY depwarning.whatShouldIDo2.content "修改plugin-container.exe的DEP属性，并重启 &brandShortName; 。修改成功后，此页面将不会再次出现。">
-<!ENTITY depwarning.whatShouldIDo2.do "应用修改（推荐）">
-<!ENTITY depwarning.expert.content "如果你仍然打算继续使用 IE 引擎浏览页面，可以点击下面的“继续”。注意，该页面可能会导致 IE 引擎的崩溃。">

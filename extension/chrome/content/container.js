@@ -27,28 +27,6 @@
 const {classes: Cc, interfaces: Ci, utils: Cu, results: Cr} = Components; 
 var IEModeContainer = IEModeContainer || {};
 
-var containers = {
-  "algorithm":"sha1",
-  "files":[
-    {"version":"Firefox7","code":"QP9ZvJL9SnFeUfPQDsZk+S282Hs="},
-    {"version":"Firefox8","code":"bLCIJYcikPVQ3EBhsU4Hvq5x8yM="},
-    {"version":"Firefox9","code":"5NunwU1RndQPWfQYNWEpOAq+i3c="},
-    {"version":"Firefox10","code":"/oNHa8ZMN9bUd4KsGzhS9NiCdlg="},
-    {"version":"Firefox11","code":"Px4Zyqp6DsEgPdwJ0eS1sagVN/o="},
-    {"version":"Firefox12","code":"nrYJrl4zOq1tbFLnyraakgVG/8I="},
-  ],
-};
-var DEPBlockInfo = {
-  list:[],
-  version:"",
-  matchIndex: -1,
-  
-};
-$(document).ready(function() {
-  var filter = IEMode.getStrPref("extensions.iemode.dep.filter","");
-  DEPBlockInfo.list = ((filter == "") ? [] : filter.split(" "));
-});
-
 Cu.import("resource://gre/modules/Services.jsm");
 
 ["LOG", "WARN", "ERROR"].forEach(function(aName) {
@@ -64,6 +42,7 @@ Cu.import("resource://gre/modules/Services.jsm");
 
 function init() 
 {
+  navigator.plugins.refresh(false);
   var c = document.getElementById("container");
   while (c.hasChildNodes())
     c.removeChild(c.firstChild);
@@ -87,6 +66,7 @@ function init()
     $("#container").append('<p align="center"> IE Mode can only work on 32bit Microsoft Windows.</p>');
   }
 }
+
 function isWindows() {
 	return navigator.platform.substring(0,3) == 'Win';	// Win32, Win64
 }
@@ -132,61 +112,7 @@ function checkOSVersion() {
 	
 	return b;
 }
-function isMatchURL(url, pattern) {
-  if ((!pattern) || (pattern.length==0))
-    return false;
-  var retest = /^\/(.*)\/$/.exec(pattern);
-  if (retest) {
-     pattern = retest[1];
-  } else {
-     pattern = pattern.replace(/\\/g, "/");
-     var m = pattern.match(/^(.+:\/\/+[^\/]+\/)?(.*)/);
-     m[1] = (m[1] ? m[1].replace(/\./g, "\\.").replace(/\?/g, "[^\\/]?").replace(/\*/g, "[^\\/]*") : "");
-     m[2] = (m[2] ? m[2].replace(/\./g, "\\.").replace(/\+/g, "\\+").replace(/\?/g, "\\?").replace(/\*/g, ".*") : "");
-     pattern = m[1] + m[2];
-     pattern = "^" + pattern.replace(/\/$/, "\/.*") + "$";
-  }
-  var reg = new RegExp(pattern.toLowerCase());
-  return (reg.test(url.toLowerCase()));
-}
 
-function getHash(path,algorithm){
-  var crypto = Cc["@mozilla.org/security/hash;1"].createInstance(Ci.nsICryptoHash);
-  try {
-    crypto.initWithString(algorithm);
-  }
-  catch (e) {
-    WARN("Unknown hash algorithm " + algorithm);
-    crypto.initWithString("sha1");
-  }
-  var file = Cc['@mozilla.org/file/local;1'].
-             createInstance(Ci.nsILocalFile);
-  if(path)	                 
-  	file.initWithPath(path);
-  	
-  var fis = Cc["@mozilla.org/network/file-input-stream;1"].
-            createInstance(Ci.nsIFileInputStream);
-  fis.init(file, -1, -1, false);
-  crypto.updateFromStream(fis, file.fileSize);
-  return crypto.finish(true);
-};
-
-function checkContainer(){
-  var file = Services.dirsvc.get("XCurProcD", Ci.nsIFile);
-  
-  file.append("plugin-container.exe");
-  var version = (Services.appinfo.name + Services.appinfo.version).split(".")[0];;
-  var code = getHash(file.path,containers.algorithm);
-  var cv = "";
-  for(var i in containers.files){
-    var c = containers.files[i];
-    if(c.version == version && c.code != code){
-      DEPBlockInfo.version = version;
-      return true;
-    }
-  }
-  return false;
-};
 function isInPrivateBrowsingMode() {
 	var pbs;
 	try { pbs = Components.classes["@mozilla.org/privatebrowsing;1"].getService(Components.interfaces.nsIPrivateBrowsingService); } catch (e) {}
@@ -245,31 +171,4 @@ function registerEventHandler() {
 	});
 }
 
-function doDEP(){
-  var dest = Services.dirsvc.get("XCurProcD", Ci.nsIFile);
-  dest.append("plugin-container.exe"); 
-  try{
-    var source = Services.prefs.getComplexValue("extensions.iemode.xpiDir", Ci.nsILocalFile);
-    source.append("bin"); 
-    var file = source.clone();
-    source.append("plugin-container"); 
-    source.append(DEPBlockInfo.version); 
-    source.append("plugin-container.exe"); 
 
-    file.append("helper.exe"); 
-    var process = Cc['@mozilla.org/process/util;1'].createInstance(Ci.nsIProcess);
-    process.init(file);
-    process.run(false, [source.path,dest.path], 2);
-    setTimeout(init,3000);
-  }catch(e){
-    ERROR(e);
-  }
-}
-
-function doContinue(savePref){
-  DEPBlockInfo.list[DEPBlockInfo.matchIndex] += "\b";
-  if(savePref){
-    IEMode.setStrPref("extensions.iemode.dep.filter",DEPBlockInfo.list.join(" "));
-  }
-	init();
-}
